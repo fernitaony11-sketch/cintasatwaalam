@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatwaAI - Klasifikasi Lingkungan & Edukasi Pelestarian</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Modal - Akses Bebas Semua Orang -->
+    <div id="loginModal" class="modal active">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="paw-animation">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <h2>Selamat Datang di <span class="highlight">SatwaAI</span></h2>
+                <p class="guest-note">✓ <strong>Akses Penuh Gratis</strong> untuk Semua Pengunjung</p>
+            </div>
+            <div class="login-form">
+                <input type="text" id="username" placeholder="Masukkan nama Anda (opsional)" maxlength="20">
+                <button onclick="loginUser()" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Mulai Petualangan
+                </button>
+                <div class="quick-access">
+                    <button onclick="quickLogin('Pengunjung')" class="quick-btn">Pengunjung</button>
+                    <button onclick="quickLogin('Pencinta Satwa')" class="quick-btn">Pencinta Satwa</button>
+                    <button onclick="quickLogin('Ranger')" class="quick-btn">Ranger</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-leaf green-leaf"></i> 
+            <span>SatwaAI</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="nav-link active" onclick="showSection('home')">
+                <i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="#gallery" class="nav-link" onclick="showSection('gallery')">
+                <i class="fas fa-images"></i> Galeri</a></li>
+            <li><a href="#classifier" class="nav-link" onclick="showSection('classifier')">
+                <i class="fas fa-robot"></i> Klasifikasi AI</a></li>
+            <li><a href="#education" class="nav-link" onclick="showSection('education')">
+                <i class="fas fa-graduation-cap"></i> Edukasi</a></li>
+        </ul>
+        <div class="user-info" id="userInfo" style="display:none;">
+            <i class="fas fa-user"></i>
+            <span id="userName"></span>
+        </div>
+        <div id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutUser()">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Beranda dengan Hero + Statistik Animasi -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-award"></i> Platform Edukasi Satwa #1
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Lindungi Satwa</span><br>
+                        Kita Bersama <span class="highlight">AI</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Klasifikasi lingkungan berbasis AI untuk edukasi sosial pelestarian satwa liar Indonesia
+                    </p>
+                    
+                    <!-- Statistik Animasi -->
+                    <div class="hero-stats" id="heroStats">
+                        <div class="stat-card" data-target="1,247">
+                            <i class="fas fa-images"></i>
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Gambar Terunggah</span>
+                        </div>
+                        <div class="stat-card" data-target="28">
+                            <i class="fas fa-paw"></i>
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Spesies Terdeteksi</span>
+                        </div>
+                        <div class="stat-card" data-target="5,892">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Pengguna Aktif</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-cta">
+                        <button class="cta-primary" onclick="showSection('classifier')">
+                            <i class="fas fa-camera"></i> Klasifikasi Sekarang
+                        </button>
+                        <button class="cta-secondary" onclick="showSection('education')">
+                            <i class="fas fa-book"></i> Pelajari Lebih Lanjut
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-cards">
+                        <div class="float-card tiger">
+                            <i class="fas fa-tiger"></i>
+                        </div>
+                        <div class="float-card rhino">
+                            <i class="fas fa-hippo"></i>
+                        </div>
+                        <div class="float-card bird">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1426604835664-4c2c868a865d?w=600&h=500&fit=crop" 
+                         alt="Satwa Indonesia" class="hero-main-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeri Gambar Satwa Interaktif -->
+        <section id="gallery" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-images"></i> Galeri Satwa Liar</h2>
+                <p>Temukan keindahan biodiversitas Indonesia melalui lensa AI</p>
+            </div>
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="tiger">Harimau</button>
+                <button class="filter-btn" data-filter="rhino">Badak</button>
+                <button class="filter-btn" data-filter="bird">Burung</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Dynamic content -->
+            </div>
+            <div class="gallery-footer">
+                <button class="upload-btn" onclick="showSection('classifier')">
+                    <i class="fas fa-plus-circle"></i> Tambah Foto Satwa Anda
+                </button>
+            </div>
+        </section>
+
+        <!-- Klasifikasi AI (Drag-Drop + Mock AI) -->
+        <section id="classifier" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> Klasifikasi Lingkungan AI</h2>
+                <p>Upload gambar satwa, AI akan mengidentifikasi spesies & status konservasinya</p>
+            </div>
+            <div class="classifier-container">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Seret gambar satwa ke sini atau <span class="click-here">klik</span> untuk upload</h3>
+                    <p><strong>Format:</strong> JPG, PNG <strong>Max:</strong> 5MB</p>
+                    <input type="file" id="imageUpload" accept="image/*" hidden>
+                    <label for="imageUpload" class="upload-btn-primary">
+                        <i class="fas fa-camera"></i> Pilih Gambar dari Galeri
+                    </label>
